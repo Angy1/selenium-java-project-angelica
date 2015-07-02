@@ -2,10 +2,13 @@ package ca.st.selenium;
 
 import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
+
 import org.testng.*;
 import org.testng.annotations.*;
+
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
@@ -17,10 +20,12 @@ public class LoginTest extends ca.st.selenium.pages.TestBase {
   @Test
   public void testUntitled() throws Exception {
     driver.get(baseUrl + "/php4dvd/");
-    driver.findElement(By.id("username")).clear();
-    driver.findElement(By.id("username")).sendKeys("admin");
-    driver.findElement(By.name("password")).clear();
-    driver.findElement(By.name("password")).sendKeys("admin");
+    WebElement usernameField = driver.findElement(By.id("username"));
+	usernameField.clear();
+    usernameField.sendKeys("admin");
+    WebElement passwordField = driver.findElement(By.name("password"));
+	passwordField.clear();
+    passwordField.sendKeys("admin");
     driver.findElement(By.name("submit")).click();
   }
 
