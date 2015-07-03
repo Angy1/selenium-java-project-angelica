@@ -5,14 +5,17 @@
   <test name="Test1(failed)">
     <parameter name="path" value="/"/>
     <classes>
-      <class name="ca.st.selenium.pages.HomePageTest">
+      <class name="ca.st.selenium.pages.TestBase">
         <methods>
-          <include name="testInit"/>
           <include name="tearDown"/>
-          <include name="init"/>
-          <include name="testH1Existing"/>
         </methods>
-      </class> <!-- ca.st.selenium.pages.HomePageTest -->
+      </class> <!-- ca.st.selenium.pages.TestBase -->
+      <class name="ca.st.selenium.LoginTest">
+        <methods>
+          <include name="testUntitled"/>
+          <include name="init"/>
+        </methods>
+      </class> <!-- ca.st.selenium.LoginTest -->
     </classes>
   </test> <!-- Test1(failed) -->
 </suite> <!-- Failed suite [Tests] -->
