@@ -11,17 +11,31 @@ import static org.hamcrest.CoreMatchers.*;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
-public class LoginTest extends ca.st.selenium.pages.TestBase {
+public class FindMovieTests extends ca.st.selenium.pages.TestBase {
   private boolean acceptNextAlert = true;
   private StringBuffer verificationErrors = new StringBuffer();
 
-  @Test
-  public void testUntitled() throws Exception {
+  //@Test
+  public void FindMovieThatIncluded() throws Exception {
+	Actions builder = new Actions(driver); 
+    driver.get(baseUrl + "/php4dvd/#!/sort/name%20asc/");
+    driver.findElement(By.id("q")).clear();
+    driver.findElement(By.id("q")).sendKeys("Pulp fiction");
+    builder.sendKeys(Keys.RETURN).perform();
     
   }
 
+ @Test
+  public void FindMovieThatNotIncluded() throws Exception {
+	Actions builder = new Actions(driver);   
+    driver.get(baseUrl + "/php4dvd/#!/sort/name%20asc/");
+    driver.findElement(By.id("q")).clear();
+    driver.findElement(By.id("q")).sendKeys("Interstellar");
+    builder.sendKeys(Keys.RETURN).perform();
+  }
   private boolean isElementPresent(By by) {
     try {
       driver.findElement(by);
@@ -46,3 +60,4 @@ public class LoginTest extends ca.st.selenium.pages.TestBase {
     }
   }
 }
+

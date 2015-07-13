@@ -11,15 +11,20 @@ import static org.hamcrest.CoreMatchers.*;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
-public class LoginTest extends ca.st.selenium.pages.TestBase {
+public class DeleteMovieTest extends ca.st.selenium.pages.TestBase {
   private boolean acceptNextAlert = true;
   private StringBuffer verificationErrors = new StringBuffer();
 
   @Test
-  public void testUntitled() throws Exception {
-    
+  public void DeleteMovie() throws Exception {
+	driver.get(baseUrl + "/php4dvd/#!/sort/name%20asc/");
+
+    driver.findElement(By.cssSelector("#movie_79 > div.title")).click();
+    driver.findElement(By.cssSelector("img[alt=\"Remove\"]")).click();
+    assertTrue(closeAlertAndGetItsText().matches("^Are you sure you want to remove this[\\s\\S]$"));
   }
 
   private boolean isElementPresent(By by) {

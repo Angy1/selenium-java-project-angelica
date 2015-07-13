@@ -5,9 +5,12 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.remote.ScreenshotException;
 import org.testng.ITestResult;
@@ -19,11 +22,6 @@ import ca.st.selenium.util.PropertyLoader;
 import ca.st.selenium.util.Browser;
 import ca.st.selenium.webdriver.WebDriverFactory;
 
-/*
- * Base class for all the test classes
- * 
- * @author Sebastiano Armeli-Battana
- */
 
 public class TestBase {
 	private static final String SCREENSHOT_FOLDER = "target/screenshots/";
@@ -44,7 +42,7 @@ public class TestBase {
 
 		browser = new Browser();
 		browser.setName(PropertyLoader.loadProperty("browser.name"));
-		browser.setVersion(PropertyLoader.loadProperty("browser.version"));
+		browser.setVersion(PropertyLoader.loadProperty("browser.version")); 
 		browser.setPlatform(PropertyLoader.loadProperty("browser.platform"));
 
 		String username = PropertyLoader.loadProperty("user.username");
@@ -53,6 +51,18 @@ public class TestBase {
 		driver = WebDriverFactory.getInstance(gridHubUrl, browser, username,
 				password);
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		
+		
+		driver.get(baseUrl + "/php4dvd/");
+	    WebElement usernameField = driver.findElement(By.id("username"));
+		usernameField.clear();
+	    usernameField.sendKeys(username);
+	    WebElement passwordField = driver.findElement(By.name("password"));
+		passwordField.clear();
+	    passwordField.sendKeys(password);
+	    driver.findElement(By.name("submit")).click();
+	    
+		
 	}
 
 	@AfterSuite(alwaysRun = true)

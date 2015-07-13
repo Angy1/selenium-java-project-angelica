@@ -11,6 +11,7 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -18,9 +19,9 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 //import com.opera.core.systems.OperaDriver;
 
+
 import ca.st.selenium.util.Browser;
 import ca.st.selenium.webdriver.AuthenticatedHtmlUnitDriver;
-
 import ca.st.selenium.util.Browser;
 
 /*
@@ -170,7 +171,7 @@ public class WebDriverFactory {
 			webDriver = new InternetExplorerDriver();
 
 		} else if (OPERA.equals(browser)) {
-			//webDriver = new OperaDriver();
+			webDriver = new OperaDriver();
 
 		} else if (SAFARI.equals(browser)) {
 			webDriver = new SafariDriver();
