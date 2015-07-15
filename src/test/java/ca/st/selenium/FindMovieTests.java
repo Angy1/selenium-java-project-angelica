@@ -18,17 +18,19 @@ public class FindMovieTests extends ca.st.selenium.pages.TestBase {
   private boolean acceptNextAlert = true;
   private StringBuffer verificationErrors = new StringBuffer();
 
-  //@Test
+ @Test
   public void FindMovieThatIncluded() throws Exception {
 	Actions builder = new Actions(driver); 
     driver.get(baseUrl + "/php4dvd/#!/sort/name%20asc/");
     driver.findElement(By.id("q")).clear();
     driver.findElement(By.id("q")).sendKeys("Pulp fiction");
     builder.sendKeys(Keys.RETURN).perform();
+    int num_movie = driver.findElements(By.xpath(".//*[@id='results']/a")).size();
     Thread.sleep(1000);
+    Assert.assertFalse(num_movie == 0);
   }
 
- @Test
+ //@Test
   public void FindMovieThatNotIncluded() throws Exception {
 	Actions builder = new Actions(driver);   
     driver.get(baseUrl + "/php4dvd/#!/sort/name%20asc/");
@@ -36,7 +38,9 @@ public class FindMovieTests extends ca.st.selenium.pages.TestBase {
     driver.findElement(By.id("q")).sendKeys("Interstellar");
     builder.sendKeys(Keys.RETURN).perform();
     Thread.sleep(1000);
+    Assert.assertFalse(!driver.findElements(By.xpath(".//*[@id='results']/a")).isEmpty());
   }
+ 
   private boolean isElementPresent(By by) {
     try {
       driver.findElement(by);
