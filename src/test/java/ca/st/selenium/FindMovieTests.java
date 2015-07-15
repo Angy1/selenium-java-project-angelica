@@ -25,7 +25,7 @@ public class FindMovieTests extends ca.st.selenium.pages.TestBase {
     driver.findElement(By.id("q")).clear();
     driver.findElement(By.id("q")).sendKeys("Pulp fiction");
     builder.sendKeys(Keys.RETURN).perform();
-    
+    Thread.sleep(1000);
   }
 
  @Test
@@ -35,6 +35,7 @@ public class FindMovieTests extends ca.st.selenium.pages.TestBase {
     driver.findElement(By.id("q")).clear();
     driver.findElement(By.id("q")).sendKeys("Interstellar");
     builder.sendKeys(Keys.RETURN).perform();
+    Thread.sleep(1000);
   }
   private boolean isElementPresent(By by) {
     try {

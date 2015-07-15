@@ -20,12 +20,22 @@ import org.openqa.selenium.support.ui.Select;
 	  @Test
 	  public void AddNewMoviePositive() throws Exception {
 	    driver.get(baseUrl + "/php4dvd/#!/sort/name%20asc/");
+	    
+	    int num_movies_original = driver.findElements(By.xpath(".//*[@id='results']/a")).size();
+	    
 	    driver.findElement(By.cssSelector("img[alt=\"Add movie\"]")).click();
 	    driver.findElement(By.name("name")).clear();
 	    driver.findElement(By.name("name")).sendKeys("The matrix");
 	    driver.findElement(By.name("year")).clear();
 	    driver.findElement(By.name("year")).sendKeys("1999");
 	    driver.findElement(By.id("submit")).click();
+	    
+	    driver.get(baseUrl + "/php4dvd/#!/sort/name%20asc/");
+	    
+	    int num_movies_new = driver.findElements(By.xpath(".//*[@id='results']/a")).size();
+	    
+	    Assert.assertFalse(num_movies_original >= num_movies_new);
+	    
 	  }
 
 	 //@Test
