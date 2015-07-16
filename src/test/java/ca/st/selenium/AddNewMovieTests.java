@@ -17,7 +17,7 @@ import org.openqa.selenium.support.ui.Select;
 	  private boolean acceptNextAlert = true;
 	  private StringBuffer verificationErrors = new StringBuffer();
 
-	  @Test
+	 @Test
 	  public void AddNewMoviePositive() throws Exception {
 	    driver.get(baseUrl + "/php4dvd/#!/sort/name%20asc/");
 	    
@@ -34,18 +34,31 @@ import org.openqa.selenium.support.ui.Select;
 	    
 	    int num_movies_new = driver.findElements(By.xpath(".//*[@id='results']/a")).size();
 	    
-	    Assert.assertFalse(num_movies_original >= num_movies_new);
 	    
+	    Assert.assertFalse(num_movies_original >= num_movies_new);
 	  }
 
-	 //@Test
+	//@Test
 	  public void AddNewMovieNegative() throws Exception {
 	    driver.get(baseUrl + "/php4dvd/#!/sort/name%20asc/");
 	    driver.findElement(By.cssSelector("img[alt=\"Add movie\"]")).click();
 	    driver.findElement(By.name("name")).clear();
 	    driver.findElement(By.name("name")).sendKeys("Fight club");
-	    driver.findElement(By.cssSelector("img[alt=\"Save\"]")).click();
-	    driver.findElement(By.id("submit")).click();
+	    
+	    
+	    
+	    
+	    Assert.assertFalse(driver.findElement(By.xpath(".//*[@id='updateform']/table/tbody/tr[4]/td[2]/label")).getCssValue("display") == "inline");
+	   
+	    
+	    
+	    //driver.findElement(By.cssSelector("img[alt=\"Save\"]")).click();
+	    //driver.findElement(By.id("submit")).click();
+	    
+  
+	    
+	    // 
+	   // Assert.assertFalse(driver.findElements(By.xpath(".//*[@id='updateform']/table/tbody/tr[30]/td[2]")).isEmpty());
 	  }
 	  private boolean isElementPresent(By by) {
 	    try {

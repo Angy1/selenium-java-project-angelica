@@ -24,7 +24,7 @@ public class DeleteMovieTest extends ca.st.selenium.pages.TestBase {
     
     int num_movies_original = driver.findElements(By.xpath(".//*[@id='results']/a")).size();
 	
-    driver.findElement(By.cssSelector("#movie_84 > div.title")).click();
+    driver.findElement(By.cssSelector("#movie_93 > div.title")).click();
     driver.findElement(By.cssSelector("img[alt=\"Remove\"]")).click();
  
     //assertTrue(closeAlertAndGetItsText().matches("^Are you sure you want to remove this[\\s\\S]$"));

@@ -52,6 +52,8 @@ public class TestBase {
 				password);
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		
+	//	app = new ApplicationManager0();
+		
 		
 		driver.get(baseUrl + "/php4dvd/");
 	    WebElement usernameField = driver.findElement(By.id("username"));
