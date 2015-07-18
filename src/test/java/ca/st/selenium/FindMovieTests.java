@@ -1,5 +1,6 @@
 package ca.st.selenium;
 
+import java.util.List;
 import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
 
@@ -20,14 +21,18 @@ public class FindMovieTests extends ca.st.selenium.pages.TestBase {
 
  @Test
   public void FindMovieThatIncluded() throws Exception {
-	Actions builder = new Actions(driver); 
+	
     driver.get(baseUrl + "/php4dvd/#!/sort/name%20asc/");
+    List<WebElement>elementsBefore = driver.findElements(By.xpath(".//*[@id='results']/a")); 
     driver.findElement(By.id("q")).clear();
-    driver.findElement(By.id("q")).sendKeys("Pulp fiction");
-    builder.sendKeys(Keys.RETURN).perform();
-    int num_movie = driver.findElements(By.xpath(".//*[@id='results']/a")).size();
+    driver.findElement(By.id("q")).sendKeys("Pulp fiction" + Keys.RETURN);
     Thread.sleep(1000);
-    Assert.assertFalse(num_movie == 0);
+    List<WebElement>elementsAfter = driver.findElements(By.xpath(".//*[@id='results']/a"));
+    Assert.assertNotEquals(elementsAfter.size(), elementsBefore.size());
+    
+    
+    
+  //  Assert.assertFalse(!driver.findElement(By.xpath(".//*[@id='movie_89']/div[1]/div")).isSelected());
   }
 
  //@Test
@@ -41,6 +46,7 @@ public class FindMovieTests extends ca.st.selenium.pages.TestBase {
     Assert.assertFalse(!driver.findElements(By.xpath(".//*[@id='results']/a")).isEmpty());
   }
  
+  
   private boolean isElementPresent(By by) {
     try {
       driver.findElement(by);
