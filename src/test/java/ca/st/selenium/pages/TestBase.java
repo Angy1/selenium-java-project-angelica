@@ -2,6 +2,7 @@ package ca.st.selenium.pages;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
@@ -34,6 +35,8 @@ public class TestBase {
 	protected String baseUrl;
 
 	protected Browser browser;
+	
+	protected String[] Credentials; 
 
 	@BeforeClass
 	public void init() {
@@ -45,25 +48,24 @@ public class TestBase {
 		browser.setVersion(PropertyLoader.loadProperty("browser.version")); 
 		browser.setPlatform(PropertyLoader.loadProperty("browser.platform"));
 
-		String username = PropertyLoader.loadProperty("user.username");
-		String password = PropertyLoader.loadProperty("user.password");
+		Credentials = new String[2];
+		Credentials[0] = PropertyLoader.loadProperty("user.username");
+		Credentials[1] = PropertyLoader.loadProperty("user.password");
 		
-		driver = WebDriverFactory.getInstance(gridHubUrl, browser, username,
-				password);
+		driver = WebDriverFactory.getInstance(gridHubUrl, browser, Credentials[0],
+				Credentials[1]);
+		
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		
-	//	app = new ApplicationManager0();
-		
-		
-		driver.get(baseUrl + "/php4dvd/");
-	    WebElement usernameField = driver.findElement(By.id("username"));
-		usernameField.clear();
-	    usernameField.sendKeys(username);
-	    WebElement passwordField = driver.findElement(By.name("password"));
-		passwordField.clear();
-	    passwordField.sendKeys(password);
-	    driver.findElement(By.name("submit")).click();
-	    
+		//	app = new ApplicationManager0();
+			driver.get(baseUrl + "/php4dvd/");
+		    WebElement usernameField = driver.findElement(By.id("username"));
+			usernameField.clear();
+		    usernameField.sendKeys(Credentials[0]);
+		    WebElement passwordField = driver.findElement(By.name("password"));
+			passwordField.clear();
+		    passwordField.sendKeys(Credentials[1]);
+		    driver.findElement(By.name("submit")).click();
 		
 	}
 

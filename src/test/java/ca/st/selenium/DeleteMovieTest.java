@@ -20,17 +20,13 @@ public class DeleteMovieTest extends ca.st.selenium.pages.TestBase {
 
   @Test
   public void DeleteMovie() throws Exception {
+	  
 	driver.get(baseUrl + "/php4dvd/#!/sort/name%20asc/");
-    
     int num_movies_original = driver.findElements(By.xpath(".//*[@id='results']/a")).size();
 	
-    driver.findElement(By.cssSelector("#movie_93 > div.title")).click();
+    driver.findElement(By.cssSelector("#movie_76 > div.title")).click();
     driver.findElement(By.cssSelector("img[alt=\"Remove\"]")).click();
- 
-    //assertTrue(closeAlertAndGetItsText().matches("^Are you sure you want to remove this[\\s\\S]$"));
-  
     driver.switchTo().alert().accept();
-    
     driver.get(baseUrl + "/php4dvd/#!/sort/name%20asc/");
     int num_movies_new = driver.findElements(By.xpath(".//*[@id='results']/a")).size();
     

@@ -13,26 +13,37 @@ import static org.hamcrest.CoreMatchers.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.thoughtworks.selenium.Wait;
 
 public class FindMovieTests extends ca.st.selenium.pages.TestBase {
   private boolean acceptNextAlert = true;
   private StringBuffer verificationErrors = new StringBuffer();
+private WebElement webElement;
 
  @Test
   public void FindMovieThatIncluded() throws Exception {
-	
-    driver.get(baseUrl + "/php4dvd/#!/sort/name%20asc/");
-    List<WebElement>elementsBefore = driver.findElements(By.xpath(".//*[@id='results']/a")); 
+	 
+	 
+    driver.get(baseUrl + "php4dvd/#!/sort/name%20asc/");
+    String orig_url = driver.getCurrentUrl();
     driver.findElement(By.id("q")).clear();
     driver.findElement(By.id("q")).sendKeys("Pulp fiction" + Keys.RETURN);
-    Thread.sleep(1000);
-    List<WebElement>elementsAfter = driver.findElements(By.xpath(".//*[@id='results']/a"));
-    Assert.assertNotEquals(elementsAfter.size(), elementsBefore.size());
     
+    new WebDriverWait(driver,10).until(ExpectedConditions.urlContains("Pulp%20fiction"));
+    String new_url = driver.getCurrentUrl();
     
-    
-  //  Assert.assertFalse(!driver.findElement(By.xpath(".//*[@id='movie_89']/div[1]/div")).isSelected());
+    if(!new_url.equals(orig_url))
+    {
+    	new WebDriverWait(driver,10).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//*[@id='movie_103']/div[1]/div")));
+    }
+    else
+    {
+    	Assert.assertFalse(true);
+    }
   }
 
  //@Test

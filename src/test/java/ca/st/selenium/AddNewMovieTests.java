@@ -17,10 +17,9 @@ import org.openqa.selenium.support.ui.Select;
 	  private boolean acceptNextAlert = true;
 	  private StringBuffer verificationErrors = new StringBuffer();
 
-	// @Test
-	  public void AddNewMoviePositive() throws Exception {
-	    driver.get(baseUrl + "/php4dvd/#!/sort/name%20asc/");
-	    
+	 //@Test
+	    public void AddNewMoviePositive() throws Exception {
+	    	    
 	    int num_movies_original = driver.findElements(By.xpath(".//*[@id='results']/a")).size();
 	    
 	    driver.findElement(By.cssSelector("img[alt=\"Add movie\"]")).click();
@@ -29,26 +28,23 @@ import org.openqa.selenium.support.ui.Select;
 	    driver.findElement(By.name("year")).clear();
 	    driver.findElement(By.name("year")).sendKeys("1999");
 	    driver.findElement(By.id("submit")).click();
-	    
 	    driver.get(baseUrl + "/php4dvd/#!/sort/name%20asc/");
-	    
 	    int num_movies_new = driver.findElements(By.xpath(".//*[@id='results']/a")).size();
-	    
-	    
 	    Assert.assertFalse(num_movies_original >= num_movies_new);
 	  }
 
+	  
 	//@Test
 	  public void AddNewMovieDoNotFillFieldNegative() throws Exception {
 	    driver.get(baseUrl + "/php4dvd/#!/sort/name%20asc/");
 	    driver.findElement(By.cssSelector("img[alt=\"Add movie\"]")).click();
 	    driver.findElement(By.name("name")).clear();
 	    driver.findElement(By.name("name")).sendKeys("Fight club");
- 
 	    Assert.assertFalse(!driver.findElement(By.xpath(".//*[@id='updateform']/table/tbody/tr[4]/td[2]/label")).isDisplayed());
 	
 	  }
 	
+	  
 	@Test
 	  public void AddNewMovieCheckSaveButtonNegative() throws Exception {
 	    driver.get(baseUrl + "/php4dvd/#!/sort/name%20asc/");
@@ -57,11 +53,8 @@ import org.openqa.selenium.support.ui.Select;
 	    driver.findElement(By.name("name")).sendKeys("Fight club");
 	    driver.findElement(By.name("year")).sendKeys(" ");
 	    driver.findElement(By.id("submit")).click();
-	    
 	    Assert.assertFalse(!driver.findElement(By.id("submit")).isEnabled());
 	    
-	    
-	  //Assert.assertFalse(!driver.findElement(By.cssSelector("img[alt=\"Save\"]")).isEnabled());
 	  }
 	
 
